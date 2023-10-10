@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Регистрация</title>
+    <link rel="stylesheet" th:href="@{/css/registration.css}"/>
     <script src="https://cdn.tailwindcss.com"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 </head>
 <body>
 <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -15,62 +17,90 @@
     <div class="lg:w-2/5 sm:mx-auto">
         <div class="lg:w-11/12 sm:mx-auto">
             <div class="w-full bg-white p-5 rounded-lg lg:rounded-l-none">
-                <form class="px-8 pt-6 pb-8 mb-4 bg-white rounded">
+                <!--            UserForm-->
+                <form th:action="@{/registration}" method="post" th:object="${userForm}"
+                      class="px-8 pt-6 pb-8 mb-4 bg-white rounded">
+                    <input type="hidden"
+                           th:name="${_csrf.parameterName}"
+                           th:value="${_csrf.token}"/>
                     <div class="mb-4 md:flex md:justify-between">
                         <div class="mb-4 md:mr-2 md:mb-0">
-                            <label class="block mb-2 text-sm font-bold text-gray-700" for="firstName">
-                                Имя
-                            </label>
+                            <label class="block mb-2 text-sm font-bold text-gray-700" for="firstName">Имя</label>
                             <input class="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                                    id="firstName"
                                    type="text"
-                                   placeholder="Бopaт"/>
+                                   th:field="*{firstName}"
+                                   placeholder="Бopaт"
+                                   th:classappend="${#fields.hasErrors('firstName')} ? 'border-2 border-rose-500' : ''"/>
                         </div>
                         <div class="md:ml-2">
-                            <label class="block mb-2 text-sm font-bold text-gray-700" for="lastName">
-                                Фамилия
-                            </label>
+                            <label class="block mb-2 text-sm font-bold text-gray-700" for="lastName">Фамилия</label>
                             <input class="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                                    id="lastName"
                                    type="text"
-                                   placeholder="Caгдиeв"/>
+                                   th:field="*{lastName}"
+                                   placeholder="Caгдиeв"
+                                   th:classappend="${#fields.hasErrors('lastName')} ? 'border-2 border-rose-500' : ''"/>
                         </div>
                     </div>
                     <div class="mb-4">
-                        <label class="block mb-2 text-sm font-bold text-gray-700" for="email">
-                            Email
-                        </label>
+                        <label class="block mb-2 text-sm font-bold text-gray-700" for="email">Email</label>
                         <input class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                                id="email"
                                type="email"
-                               placeholder="Email"/>
+                               th:field="*{email}"
+                               placeholder="Email"
+                               th:classappend="${#fields.hasErrors('lastName')} ? 'border-2 border-rose-500' : ''"/>
                     </div>
                     <div class="mb-4 md:flex md:justify-between">
                         <div class="mb-4 md:mr-2 md:mb-0">
-                            <label class="block mb-2 text-sm font-bold text-gray-700" for="password">
-                                Пароль
-                            </label>
-                            <input class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                                   id="password"
-                                   type="password"
-                                   placeholder="******************"/>
-                            <!--                        <p class="text-xs italic text-red-500">Пароль</p>-->
+                            <label class="block mb-2 text-sm font-bold text-gray-700" for="password">Пароль</label>
+                            <div class="relative">
+                                <input class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                                       id="password"
+                                       type="password"
+                                       th:field="*{password}"
+                                       placeholder="******************"
+                                       th:classappend="${#fields.hasErrors('password')} ? 'border-2 border-rose-500' : ''"/>
+                                <span class="absolute inset-y-0 right-0 pr-3 flex items-center mb-3">
+                                    <button type="button"
+                                            class="text-gray-600 hover:text-gray-900 focus:outline-none focus:text-gray-900"
+                                            onclick="togglePasswordVisibility('password', 'togglePasswordButton')">
+                                    <span id="togglePasswordButton"> <i class="uil uil-eye toggle"></i></span>
+                                    </button>
+                                </span>
+                            </div>
                         </div>
                         <div class="md:ml-2">
-                            <label class="block mb-2 text-sm font-bold text-gray-700" for="c_password">
-                                Повторите пароль
-                            </label>
-                            <input class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                                   id="c_password"
-                                   type="password"
-                                   placeholder="******************"/>
+                            <label class="block mb-2 text-sm font-bold text-gray-700" for="c_password">Повторите
+                                пароль</label>
+                            <div class="relative">
+                                <input class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                                       id="c_password"
+                                       type="password"
+                                       placeholder="******************"/>
+                                <span class="absolute inset-y-0 right-0 pr-3 flex items-center mb-3">
+                                    <button type="button"
+                                            class="text-gray-600 hover:text-gray-900 focus:outline-none focus:text-gray-900"
+                                            onclick="togglePasswordVisibility('c_password', 'toggleCPasswordButton')">
+                                        <span id="toggleCPasswordButton"><i class="uil uil-eye toggle"></i></span>
+                                    </button>
+                                </span>
+                            </div>
                         </div>
                     </div>
+
+                    <label class="text-center text-sm text-red-500">
+                        <label th:if="${#fields.hasErrors('global')}">
+                            <p th:each="err : ${#fields.errors('global')}" th:text="${err}"></p>
+                        </label>
+                        <p id="passwordMatchError" class="text-red-500"></p>
+                    </label>
                     <div class="mb-6 text-center">
-                        <button type="submit"
-                                class="w-full mt-6 bg-indigo-600 rounded-lg px-4 py-2 text-lg text-white tracking-wide font-semibold font-sans">
-                            Подтвердить
-                        </button>
+                        <input type="submit"
+                               id="submitButton"
+                               value="Подтвердить"
+                               class="w-full mt-6 bg-indigo-600 rounded-lg px-4 py-2 text-lg text-white tracking-wide font-semibold font-sans"/>
                     </div>
                     <hr class="mb-6 border-t"/>
                     <div class="text-center">
@@ -82,10 +112,48 @@
                         </p>
                     </div>
                 </form>
+
             </div>
         </div>
     </div>
 </div>
-</body>
+<script>
+    function togglePasswordVisibility(fieldId, toggleId) {
+        var passwordField = document.getElementById(fieldId);
+        var toggleButton = document.getElementById(toggleId);
+
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            toggleButton.innerHTML = "<i class=\"uil uil-eye-slash toggle\"></i>";
+        } else {
+            passwordField.type = "password";
+            toggleButton.innerHTML = "<i class=\"uil uil-eye toggle\"></i>";
+        }
+    }
+
+    function checkPasswordMatch() {
+        var password1 = document.getElementById("password").value;
+        var password2 = document.getElementById("c_password").value;
+        var errorElement = document.getElementById("passwordMatchError");
+        var submitButton = document.getElementById("submitButton");
+
+        if (password2 !== "") { // Проверяем только если поле повторного пароля заполнено
+            if (password1 !== password2) {
+                errorElement.innerHTML = "• Пароли не совпадают.";
+                submitButton.disabled = true; // Отключить кнопку "Подтвердить"
+            } else {
+                errorElement.innerHTML = ""; // Очистить сообщение об ошибке
+                submitButton.disabled = false; // Включить кнопку "Подтвердить"
+            }
+        } else {
+            errorElement.innerHTML = ""; // Очистить сообщение об ошибке, если поле повторного пароля пустое
+            submitButton.disabled = false; // Включить кнопку "Подтвердить", если поле пустое
+        }
+    }
+
+    document.getElementById("c_password").addEventListener("input", checkPasswordMatch);
+</script>
+
+
 </body>
 </html>
