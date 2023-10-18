@@ -10,6 +10,6 @@ public class UserMapperImpl implements EntityMapper<User, UserDto> {
 
     @Override
     public UserDto map(User user) {
-        return new UserDto(user.getId(), user.getFirstName(), user.getLastName(), user.getEmail(), "0/0");
+        return new UserDto(user.getId(), user.getFirstName(), user.getLastName(), user.getEmail(),"0/0", user.getRoles());
     }
 }

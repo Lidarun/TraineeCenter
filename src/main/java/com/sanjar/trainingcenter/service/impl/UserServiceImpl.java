@@ -9,7 +9,6 @@ import com.sanjar.trainingcenter.repository.UserRepository;
 import com.sanjar.trainingcenter.service.UserService;
 import com.sanjar.trainingcenter.service.UserValidationService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -24,7 +23,6 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-@CacheConfig(cacheNames = {"users"})
 public class UserServiceImpl implements UserService, UserValidationService {
     private final UserRepository userRep;
     private final EntityMapper<User, UserDto> mapper;
@@ -53,14 +51,14 @@ public class UserServiceImpl implements UserService, UserValidationService {
     }
 
     @Override
-    @Cacheable
+    @Cacheable("users")
     public List<UserDto> findAllAsUserDto() {
         List<User> users = userRep.findAll();
         return users.stream().map(mapper::map).collect(Collectors.toList());
     }
 
     @Override
-    @CachePut
+    @CachePut("users")
     public List<UserDto> updateCache() {
         List<User> users = userRep.findAll();
         return users.stream().map(mapper::map).collect(Collectors.toList());
@@ -95,13 +93,12 @@ public class UserServiceImpl implements UserService, UserValidationService {
     public void deleteByID(long id) throws UserNotFoundException {
         Optional<User> user = userRep.findById(id);
 
-        if (user.isPresent())
+        if (user.isPresent()) {
             if (!user.get().getRoles().contains(Role.ROLE_SUPER_ADMIN))
                 userRep.deleteById(id);
-
-        else
+        } else {
             throw new UserNotFoundException("User not found with id: " + id);
-
+        }
     }
 
     //  VALIDATION

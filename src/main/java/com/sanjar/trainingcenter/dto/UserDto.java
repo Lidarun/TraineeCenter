@@ -1,8 +1,11 @@
 package com.sanjar.trainingcenter.dto;
 
+import com.sanjar.trainingcenter.model.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -13,6 +16,7 @@ public class UserDto {
     private String lastName;
     private String email;
     private String result;
+    private Set<Role> roles;
 
     @Override
     public String toString() {

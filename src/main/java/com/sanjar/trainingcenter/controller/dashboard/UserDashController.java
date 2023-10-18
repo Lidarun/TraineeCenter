@@ -15,20 +15,25 @@ import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/dashboard")
-public class MainDashController {
+@RequestMapping("/dashboard/user")
+public class UserDashController {
     private final UserService userService;
 
     @GetMapping()
     private String showPage(Model model) {
-        List<User> userList = userService.findAll();
-        userService.updateCache();
+        List<UserDto> userList = userService.findAllAsUserDto();
 
         model.addAttribute("countUsers", userList.size());
         model.addAttribute("users", userList);
         model.addAttribute("role", Role.ROLE_SUPER_ADMIN);
 
         return "dashboard/dashboard";
+    }
+
+    @GetMapping("/update")
+    private String updatePage() {
+        userService.updateCache();
+        return "redirect:/dashboard/user";
     }
 
     @GetMapping("/{rolePage}")
@@ -61,15 +66,17 @@ public class MainDashController {
     private String setRole(@PathVariable long id,
                            @RequestParam("role") Role role) throws UserNotFoundException {
         userService.changeRole(id, role);
+        userService.updateCache();
 
-        return "redirect:/dashboard";
+        return "redirect:/dashboard/user";
     }
 
     @PostMapping("/delete/{id}")
     private String deleteUser(@PathVariable long id) throws UserNotFoundException {
         userService.deleteByID(id);
+        userService.updateCache();
 
-        return "redirect:/dashboard";
+        return "redirect:/dashboard/user";
     }
 
 

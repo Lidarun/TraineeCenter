@@ -8,4 +8,5 @@ public interface ApplicationService {
     Application create(Application application);
     void deleteById(long id);
     List<Application> findAll();
+    List<Application> updateCache();
 }
