@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Getter @Setter
@@ -37,9 +38,10 @@ public class User implements Serializable {
     @Email(message = "Пожалуйста, введите действительный e-mail адрес")
     private String email;
 
-    @Column(name = "role")
-    @Enumerated(value = EnumType.STRING)
-    private Role role = Role.ROLE_USER;
+    @Enumerated(EnumType.STRING)
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "tb_users_roles", joinColumns = @JoinColumn(name = "user_id"))
+    private Set<Role> roles;
 
 
     @Override
@@ -51,6 +53,6 @@ public class User implements Serializable {
                 "| email: " + email + '\'' +
                 "| password: " + password + '\'' +
                 "| confirmPassword: " + confirmPassword + '\'' +
-                "| role: " + role;
+                "| role: " + roles;
     }
 }

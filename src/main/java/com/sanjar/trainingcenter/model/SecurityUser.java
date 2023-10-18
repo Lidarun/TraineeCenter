@@ -13,7 +13,7 @@ public class SecurityUser implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(user.getRole());
+        return user.getRoles();
     }
 
     @Override

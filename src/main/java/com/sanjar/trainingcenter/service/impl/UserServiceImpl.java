@@ -1,21 +1,31 @@
 package com.sanjar.trainingcenter.service.impl;
 
+import com.sanjar.trainingcenter.dto.UserDto;
+import com.sanjar.trainingcenter.mappers.EntityMapper;
+import com.sanjar.trainingcenter.model.Role;
 import com.sanjar.trainingcenter.model.User;
 import com.sanjar.trainingcenter.repository.UserRepository;
 import com.sanjar.trainingcenter.service.UserService;
 import com.sanjar.trainingcenter.service.UserValidationService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.ObjectError;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@CacheConfig(cacheNames = {"users"})
 public class UserServiceImpl implements UserService, UserValidationService {
     private final UserRepository userRep;
+    private final EntityMapper<User, UserDto> mapper;
 
     @Override
     public void create(User user) {
@@ -30,8 +40,31 @@ public class UserServiceImpl implements UserService, UserValidationService {
         return userRep.findByEmail(email).orElse(null);
     }
 
+    @Override
+    public List<User> findAll() {
+        return userRep.findAll();
+    }
 
-//  VALIDATION
+    @Override
+    public List<User> findAllByRole(Role role) {
+        return userRep.findAllByRolesContains(role);
+    }
+
+    @Override
+    @Cacheable
+    public List<UserDto> findAllAsUserDto() {
+        List<User> users = userRep.findAll();
+        return users.stream().map(mapper::map).collect(Collectors.toList());
+    }
+
+    @Override
+    @CachePut
+    public List<UserDto> updateCache() {
+        List<User> users = userRep.findAll();
+        return users.stream().map(mapper::map).collect(Collectors.toList());
+    }
+
+    //  VALIDATION
     @Override
     public ObjectError existUserByEmail(String email) {
         boolean exist = userRep.existsByEmail(email);
@@ -44,7 +77,6 @@ public class UserServiceImpl implements UserService, UserValidationService {
 
         return null;
     }
-
 
     @Override
     public ObjectError validPassword(String password) {
