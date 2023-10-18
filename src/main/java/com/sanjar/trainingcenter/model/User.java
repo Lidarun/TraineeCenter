@@ -27,8 +27,6 @@ public class User implements Serializable {
     private String lastName;
 
     @NotEmpty(message = "Обязательное поле")
-//    @Size(min = 7, message = "Пароль должен содержать не менее 8-ми символов, " +
-//            "в том числе цифры, прописные и строчные буквы")
     private String password;
 
     @Transient
@@ -39,8 +37,8 @@ public class User implements Serializable {
     @Email(message = "Пожалуйста, введите действительный e-mail адрес")
     private String email;
 
-    @Enumerated(value = EnumType.STRING)
     @Column(name = "role")
+    @Enumerated(value = EnumType.STRING)
     private Role role = Role.ROLE_USER;
 
 
