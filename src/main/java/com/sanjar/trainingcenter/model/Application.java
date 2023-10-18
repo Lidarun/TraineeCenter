@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "tb_applications")
-public class ApplicationForm {
+public class Application {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

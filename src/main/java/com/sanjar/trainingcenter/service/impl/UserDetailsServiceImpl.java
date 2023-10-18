@@ -1,4 +1,4 @@
-package com.sanjar.trainingcenter.service;
+package com.sanjar.trainingcenter.service.impl;
 
 import com.sanjar.trainingcenter.model.SecurityUser;
 import com.sanjar.trainingcenter.repository.UserRepository;

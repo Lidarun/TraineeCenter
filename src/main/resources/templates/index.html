@@ -267,9 +267,9 @@
     const userMenuBtn = document.getElementById('user-menu-btn');
     const userMenu = document.getElementById('user-menu');
 
-    // userMenuBtn.addEventListener('click', () => {
-    //     userMenu.classList.toggle('hidden');
-    // });
+    userMenuBtn.addEventListener('click', () => {
+        userMenu.classList.toggle('hidden');
+    });
 
     document.addEventListener('click', (event) => {
         if (!userMenu.contains(event.target) && !userMenuBtn.contains(event.target)) {
