@@ -1,6 +1,7 @@
 package com.sanjar.trainingcenter.service.impl;
 
 import com.sanjar.trainingcenter.dto.UserDto;
+import com.sanjar.trainingcenter.exceptions.UserNotFoundException;
 import com.sanjar.trainingcenter.mappers.EntityMapper;
 import com.sanjar.trainingcenter.model.Role;
 import com.sanjar.trainingcenter.model.User;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.ObjectError;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -64,13 +66,49 @@ public class UserServiceImpl implements UserService, UserValidationService {
         return users.stream().map(mapper::map).collect(Collectors.toList());
     }
 
+    @Override
+    public User findById(long id) throws UserNotFoundException {
+        return userRep.findById(id).orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
+    }
+
+    @Override
+    public void changeRole(long id, Role role) throws UserNotFoundException {
+        Optional<User> user = userRep.findById(id);
+
+
+        if (user.isPresent()) {
+
+            if (user.get().getRoles().contains(role))
+                user.get().getRoles().remove(role);
+
+            else
+                user.get().getRoles().add(role);
+
+            userRep.save(user.get());
+
+        } else {
+            throw new UserNotFoundException("User not found with id: " + id);
+        }
+    }
+
+    @Override
+    public void deleteByID(long id) throws UserNotFoundException {
+        Optional<User> user = userRep.findById(id);
+
+        if (user.isPresent())
+            if (!user.get().getRoles().contains(Role.ROLE_SUPER_ADMIN))
+                userRep.deleteById(id);
+
+        else
+            throw new UserNotFoundException("User not found with id: " + id);
+
+    }
+
     //  VALIDATION
     @Override
     public ObjectError existUserByEmail(String email) {
-        boolean exist = userRep.existsByEmail(email);
-
-        ObjectError error = new ObjectError("global",
-                "• Пользователь c почтой '" +email+ "' уже существует");
+         ObjectError error = new ObjectError("global",
+                    "• Пользователь c почтой '" + email + "' уже существует");
 
         if (userRep.existsByEmail(email))
             return error;

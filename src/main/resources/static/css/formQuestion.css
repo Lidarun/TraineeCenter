@@ -1,0 +1,139 @@
+.checkbox-button {
+    margin-top: 1.5%;
+    display: inline-block;
+    border: 1px solid #ccc;
+    padding: 8px 16px;
+    border-radius: 4px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.checkbox-button:hover {
+    transition: 1s;
+    background-color: #00cc00;
+    color: black;
+}
+.checkbox-button input[type="radio"]:checked + .checkbox-label {
+    background-color: #00cc00;
+    color: #000000;
+    padding: 8px 16px;
+    border-radius: 4px;
+}
+.checkbox-input {
+    display: none;
+}
+
+.checkbox-label {
+    font-weight: bold;
+}
+.checkbox-input:checked + .checkbox-label {
+    color: #fff;
+    background-color: #007bff;
+}
+.text-sm{
+    margin-right: 1%;
+}
+.table {
+    table-layout: fixed;
+    width: 100%;
+    overflow: auto;
+}
+.table td {
+    word-wrap: break-word;
+    white-space: normal;
+    max-height: 100px;
+    overflow-y: auto;
+    font-size: 12px;
+}
+.edit-button{
+    padding-bottom: 10px;
+}
+.edit-button:hover{
+    color: #00cc00;
+}
+/*.delete-button{*/
+/*    padding-top: 10px;*/
+/*}*/
+.delete-button:hover{
+    color: red;
+}
+.green-cell {
+    background-color: green;
+    color: white;
+}
+.user-answer {
+    background-color: white;
+    border: black solid;
+    border-radius: 9px;
+    color: black;
+}
+.error-border {
+    border-color: red !important;
+}
+.error{
+    color: rgba(234, 44, 44, 0.91);
+    font-size: 13px;
+    font-family: Bahnschrift, serif;
+}
+
+.mb-8{
+    margin-bottom: 1rem;
+}
+.radio-label {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 5px;
+}
+.radio-input {
+    opacity: 0;
+    position: absolute;
+}
+.radio-text {
+    padding-left: 5px;
+}
+.radio-input:checked + .radio-text {
+    font-weight: bold;
+    color: blue;
+}
+.pagination {
+    display: flex;
+    margin: 0 0 1% 1%;
+    border-radius: 5px;
+}
+.page-item {
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+.page-link {
+    color: #007bff;
+    text-decoration: none;
+    border: 1px solid #dee2e6;
+    padding: 6px 12px;
+}
+.page-link:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+.page-link.disabled {
+    color: #6c757d;
+    pointer-events: none;
+    cursor: default;
+}
+.greenLamp{
+    color: #00cc00;
+}
+.redLamp{
+    color: red;
+}
+
+.wrapLang{
+    margin: 0.5% 0 1% 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.state{
+    margin-top: 1.5%;
+}
