@@ -1,14 +1,20 @@
 package com.sanjar.trainingcenter.controller;
 
+import com.sanjar.trainingcenter.model.Application;
 import com.sanjar.trainingcenter.model.User;
+import com.sanjar.trainingcenter.service.ApplicationService;
 import com.sanjar.trainingcenter.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -16,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 public class HomeController {
     private final UserService userService;
+    private final ApplicationService applicationService;
 
     @GetMapping
     public String home(Model model,
@@ -35,6 +42,12 @@ public class HomeController {
         }
 
         return "index";
+    }
+
+    @PostMapping("/application")
+    public ResponseEntity<?> getApplication(@RequestBody Application application) {
+        applicationService.create(application);
+        return new ResponseEntity<>("SUCCESS", HttpStatus.OK);
     }
 
 }

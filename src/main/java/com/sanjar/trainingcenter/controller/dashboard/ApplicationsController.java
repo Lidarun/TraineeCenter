@@ -12,7 +12,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/dashboard/application")
-public class ApplicationsDashController {
+public class ApplicationsController {
     private final ApplicationService applicationService;
 
     @GetMapping()

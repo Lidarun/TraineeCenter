@@ -1,11 +1,14 @@
 package com.sanjar.trainingcenter.service.impl;
 
+import com.sanjar.trainingcenter.dto.UserDto;
 import com.sanjar.trainingcenter.model.Course;
 import com.sanjar.trainingcenter.model.User;
 import com.sanjar.trainingcenter.repository.CourseRepository;
 import com.sanjar.trainingcenter.service.CourseService;
 import com.sanjar.trainingcenter.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,7 +29,14 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    @Cacheable("courses")
     public List<Course> findAll() {
+        return courseRep.findAll();
+    }
+
+    @Override
+    @CachePut("courses")
+    public List<Course> updateCache() {
         return courseRep.findAll();
     }
 

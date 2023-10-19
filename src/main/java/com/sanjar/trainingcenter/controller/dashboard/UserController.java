@@ -16,11 +16,11 @@ import java.util.Optional;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/dashboard/user")
-public class UserDashController {
+public class UserController {
     private final UserService userService;
 
     @GetMapping()
-    private String showPage(Model model) {
+    public String showPage(Model model) {
         List<UserDto> userList = userService.findAllAsUserDto();
 
         model.addAttribute("countUsers", userList.size());
@@ -31,13 +31,13 @@ public class UserDashController {
     }
 
     @GetMapping("/update")
-    private String updatePage() {
+    public String updatePage() {
         userService.updateCache();
         return "redirect:/dashboard/user";
     }
 
-    @GetMapping("/{rolePage}")
-    private String showFilterPage(@PathVariable("rolePage") Role role,
+    @GetMapping("/filterByRole/{role}")
+    public String showFilterPage(@PathVariable("role") Role role,
                                   Model model) {
         List<User> userList = userService.findAllByRole(role);
 
@@ -48,9 +48,9 @@ public class UserDashController {
         return "dashboard/filter/users-by-role";
     }
 
-    @GetMapping("/update/{id}")
-    private String updateUser(@PathVariable("id") long id,
-                              Model model) throws UserNotFoundException {
+    @GetMapping("/{id}")
+    public String updateUser(@PathVariable("id") long id,
+                              Model model) {
         User user = userService.findById(id);
 
         model.addAttribute("fromUser", user);
@@ -62,8 +62,8 @@ public class UserDashController {
         return "dashboard/edit-user";
     }
 
-    @PostMapping("/update/{id}")
-    private String setRole(@PathVariable long id,
+    @PostMapping("/{id}")
+    public String setRole(@PathVariable long id,
                            @RequestParam("role") Role role) throws UserNotFoundException {
         userService.changeRole(id, role);
         userService.updateCache();
@@ -72,7 +72,7 @@ public class UserDashController {
     }
 
     @PostMapping("/delete/{id}")
-    private String deleteUser(@PathVariable long id) throws UserNotFoundException {
+    public String deleteUser(@PathVariable long id) {
         userService.deleteById(id);
         userService.updateCache();
 
@@ -80,7 +80,7 @@ public class UserDashController {
     }
 
 
-//    //Живой поиск
+    //Живой поиск
     @ResponseBody
     @GetMapping("/search")
     public Optional<UserDto> searchUser(@RequestParam("query") String userInfo) {

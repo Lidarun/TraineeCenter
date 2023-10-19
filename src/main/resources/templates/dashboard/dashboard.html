@@ -318,12 +318,6 @@
                                  style="font-family: Bahnschrift, serif ; margin: 2% 0 0 5%; background: gainsboro; border-radius: 5px"></div>
                         </div>
                     </div>
-
-                    <!--                    <div style="padding-top: 0.5%">-->
-                    <!--                        <a th:href="@{/dashboard/updateSearch}">-->
-                    <!--                            <i class="fas fa-solid fa-recycle"></i>-->
-                    <!--                        </a>-->
-                    <!--                    </div>-->
                 </div>
 
                 <ul class="flex items-center flex-shrink-0 space-x-6">
@@ -467,7 +461,7 @@
                                     <td class="text-center"
                                         sec:authorize="hasAnyRole('ROLE_SUPER_ADMIN', 'ROLE_ADMIN')">
                                         <form th:if="${!user.getRoles().contains(role)}"
-                                              th:action="@{/dashboard/user/update/{id}(id=${user.getId()})}"
+                                              th:action="@{/dashboard/user/{id}(id=${user.getId()})}"
                                               th:method="get">
                                             <button type="submit" class="btn btn-warning edit-button">
                                                 <i class="fas fa-solid fa-pen"></i>
@@ -551,7 +545,7 @@
 
 
     function filterUsers(rolePage) {
-        const url = "/dashboard/user/" + rolePage;
+        const url = "/dashboard/user/filterByRole/" + rolePage;
         const userList = document.getElementById("user-list");
 
         userList.innerHTML = "Loading...";
