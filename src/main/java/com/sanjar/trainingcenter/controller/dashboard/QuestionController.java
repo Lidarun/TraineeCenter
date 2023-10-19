@@ -105,10 +105,6 @@ public class QuestionController {
 
         if (question != null) {
             model.addAttribute("formQuestion", question);
-//            question.getOptions().add(a);
-//            question.getOptions().add(b);
-//            question.getOptions().add(c);
-//            question.getOptions().add(d);
 
             return "dashboard/edit-question";
 
@@ -121,8 +117,10 @@ public class QuestionController {
     public String updateQuestion(@PathVariable("id") int id,
                                  @ModelAttribute("formQuestion") Question updatedQuestion) {
         Question questionOptional = questionService.findById(id);
-        if (questionOptional != null)
+        if (questionOptional != null) {
+            updatedQuestion.setCorrectAnswer(updatedQuestion.getCorrectAnswer() - 1);
             questionService.create(updatedQuestion);
+        }
 
         return "redirect:/dashboard/question/0";
     }

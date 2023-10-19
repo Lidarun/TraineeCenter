@@ -604,7 +604,7 @@
         const optionsCount = document.querySelectorAll('input[name^="options["]').length;
 
         // Парсим введенное значение как целое число
-        const enteredValue = parseInt(correctAnswerInput.value, 10);
+        const enteredValue = parseInt(correctAnswerInput.value, 10) - 1;
 
         if (isNaN(enteredValue) || enteredValue < 0 || enteredValue >= optionsCount) {
             correctAnswerInput.setCustomValidity(`Введите число от 1 до ${optionsCount}`);
