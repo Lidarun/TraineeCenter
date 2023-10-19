@@ -43,6 +43,13 @@ public class User implements Serializable {
     @CollectionTable(name = "tb_users_roles", joinColumns = @JoinColumn(name = "user_id"))
     private Set<Role> roles;
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH, CascadeType.PERSIST})
+    @JoinTable(
+            name = "tb_users_courses",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id")
+    )
+    private Set<Course> courses;
 
     @Override
     public String toString() {
@@ -54,5 +61,16 @@ public class User implements Serializable {
                 "| password: " + password + '\'' +
                 "| confirmPassword: " + confirmPassword + '\'' +
                 "| role: " + roles;
+    }
+
+
+    public void addCourse(Course course) {
+        courses.add(course);
+        course.getUsers().add(this);
+    }
+
+    public void removeCourse(Course course) {
+        courses.remove(course);
+        course.getUsers().remove(this);
     }
 }

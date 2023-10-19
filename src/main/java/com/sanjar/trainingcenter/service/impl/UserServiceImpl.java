@@ -65,8 +65,8 @@ public class UserServiceImpl implements UserService, UserValidationService {
     }
 
     @Override
-    public User findById(long id) throws UserNotFoundException {
-        return userRep.findById(id).orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
+    public User findById(long id) {
+        return userRep.findById(id).orElse(null);
     }
 
     @Override
@@ -90,15 +90,12 @@ public class UserServiceImpl implements UserService, UserValidationService {
     }
 
     @Override
-    public void deleteByID(long id) throws UserNotFoundException {
+    public void deleteById(long id) {
         Optional<User> user = userRep.findById(id);
 
-        if (user.isPresent()) {
+        if (user.isPresent())
             if (!user.get().getRoles().contains(Role.ROLE_SUPER_ADMIN))
                 userRep.deleteById(id);
-        } else {
-            throw new UserNotFoundException("User not found with id: " + id);
-        }
     }
 
     //  VALIDATION

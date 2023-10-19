@@ -7,14 +7,10 @@ import com.sanjar.trainingcenter.model.User;
 
 import java.util.List;
 
-public interface UserService {
-    void create(User user);
+public interface UserService extends CrudService<User> {
     User findByEmail(String email);
-    List<User> findAll();
     List<User> findAllByRole(Role role);
     List<UserDto> findAllAsUserDto();
     List<UserDto> updateCache();
-    User findById(long id) throws UserNotFoundException;
     void changeRole(long id, Role role) throws UserNotFoundException;
-    void deleteByID(long id) throws UserNotFoundException;
 }

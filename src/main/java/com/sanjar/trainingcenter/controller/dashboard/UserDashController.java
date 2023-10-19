@@ -73,7 +73,7 @@ public class UserDashController {
 
     @PostMapping("/delete/{id}")
     private String deleteUser(@PathVariable long id) throws UserNotFoundException {
-        userService.deleteByID(id);
+        userService.deleteById(id);
         userService.updateCache();
 
         return "redirect:/dashboard/user";
