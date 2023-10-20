@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.sanjar</groupId>
 	<artifactId>training-center</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>v1</version>
 	<name>ITcourse</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
