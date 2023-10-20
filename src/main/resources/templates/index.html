@@ -179,7 +179,7 @@
                 <div class="mb-12 space-y-4">
                     <h3 class="text-2xl font-semibold text-purple-900">Компьютерные курсы</h3>
                     <p class="mb-6">Obcaecati, quam? Eligendi, nulla numquam natus laborum porro at cum, consectetur ullam tempora ipsa iste officia sed officiis! Incidunt ea animi officiis.</p>
-                    <a href="#" class="block font-medium text-purple-600">Узнать больше...</a>
+                    <a href="/computer-course" class="block font-medium text-purple-600">Узнать больше...</a>
                 </div>
                 <img src="https://tailus.io/sources/blocks/end-image/preview/images/ui-design.svg" class="w-2/3 ml-auto" alt="illustration" loading="lazy" width="900" height="600">
             </div>
@@ -187,7 +187,7 @@
                 <div class="mb-12 space-y-4">
                     <h3 class="text-2xl font-semibold text-purple-900">Подготовка к ОРТ</h3>
                     <p class="mb-6">Obcaecati, quam? Eligendi, nulla numquam natus laborum porro at cum, consectetur ullam tempora ipsa iste officia sed officiis! Incidunt ea animi officiis.</p>
-                    <a href="#" class="block font-medium text-purple-600">Узнать больше...</a>
+                    <a href="/ort-course" class="block font-medium text-purple-600">Узнать больше...</a>
                 </div>
                 <img src="https://tailus.io/sources/blocks/end-image/preview/images/ux-design.svg" class="w-2/3 ml-auto " alt="illustration" loading="lazy" width="900" height="600">
             </div>
@@ -270,9 +270,9 @@
     const userMenuBtn = document.getElementById('user-menu-btn');
     const userMenu = document.getElementById('user-menu');
 
-    userMenuBtn.addEventListener('click', () => {
-        userMenu.classList.toggle('hidden');
-    });
+    // userMenuBtn.addEventListener('click', () => {
+    //     userMenu.classList.toggle('hidden');
+    // });
 
     document.addEventListener('click', (event) => {
         if (!userMenu.contains(event.target) && !userMenuBtn.contains(event.target)) {

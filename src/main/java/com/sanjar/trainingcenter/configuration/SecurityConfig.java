@@ -4,6 +4,7 @@ import com.sanjar.trainingcenter.service.impl.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -11,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.logout.HeaderWriterLogoutHandler;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.csrf.XorCsrfTokenRequestAttributeHandler;
 import org.springframework.security.web.header.writers.ClearSiteDataHeaderWriter;
 
@@ -29,13 +31,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf((csrf) -> csrf
-                        .csrfTokenRequestHandler(new XorCsrfTokenRequestAttributeHandler())
+                .csrf((csrf) -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 )
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/css/**", "/img/**", "/js/**").permitAll()
-                        .requestMatchers("/", "/registration","/reset-password", "/application").permitAll()
-                        .requestMatchers("/dashboard", "/dashboard/**").hasAnyRole ("SUPER_ADMIN", "ADMIN", "TEACHER")
+                        .requestMatchers(HttpMethod.POST, "/application").permitAll()
+                        .requestMatchers("/", "/registration","/reset-password", "/computer-course", "ort-course").permitAll()
+                        .requestMatchers("/dashboard/**").hasAnyRole ("SUPER_ADMIN", "ADMIN", "TEACHER")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form.
