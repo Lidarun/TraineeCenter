@@ -7,7 +7,8 @@
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="" th:href="@{/css/index.css}">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script th:src="@{/js/contact.js}"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="hero section">
@@ -36,6 +37,18 @@
                     <div class="text-gray-600 dark:text-gray-300 lg:pr-4">
                         <ul class="space-y-6 tracking-wide font-medium text-base lg:text-sm lg:flex lg:space-y-0">
                             <li>
+                                <a href="/#courses"
+                                   class="block md:px-4 transition hover:text-primary dark:hover:text-primaryLight">
+                                    <span>Курсы</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/#rating"
+                                   class="block md:px-4 transition hover:text-primary dark:hover:text-primaryLight">
+                                    <span>Рейтинг</span>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="#contactUs"
                                    class="block md:px-4 transition hover:text-primary dark:hover:text-primaryLight">
                                     <span>Связать с нами</span>
@@ -56,7 +69,7 @@
                     <div class="relative ml-3" sec:authorize="isAuthenticated()">
                         <button type="button"
                                 class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                                id="user-menu-btn" aria-expanded="false" aria-haspopup="true">
+                                id="user-menu-btn" aria-expanded="false" aria-haspopup="true" onclick="toggleUserMenu()">
                             <span class="absolute -inset-1.5"></span>
                             <span class="sr-only">Open user menu</span>
                             <img class="h-8 w-8 rounded-full"
@@ -67,11 +80,12 @@
                              class="hidden absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                              role="menu" aria-orientation="vertical" tabindex="-1">
                             <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem">Мой профиль</a>
-                            <a href="/dashboard/user"   sec:authorize="hasAnyRole('ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_TEACHER')"
+                            <a href="/dashboard/user" sec:authorize="hasAnyRole('ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_TEACHER')"
                                class="block px-4 py-2 text-sm text-gray-700" role="menuitem">Админ панель</a>
                             <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem">Настройки</a>
                             <a href="/logout" class="block px-4 py-2 text-sm text-gray-700" role="menuitem">Выход</a>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -97,8 +111,6 @@
         <img alt="logo" width="420" height="120" th:src="@{/img/office.gif}" />
     </div>
 </div>
-
-
 
 
 <div class="px-4 bg-white mb-8 py-8 rounded-3xl mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 ">
@@ -212,77 +224,5 @@
         </div>
     </div>
 </div>
-
-<script>
-    const userMenuBtn = document.getElementById('user-menu-btn');
-    const userMenu = document.getElementById('user-menu');
-
-    // userMenuBtn.addEventListener('click', () => {
-    //     userMenu.classList.toggle('hidden');
-    // });
-
-    document.addEventListener('click', (event) => {
-        if (!userMenu.contains(event.target) && !userMenuBtn.contains(event.target)) {
-            userMenu.classList.add('hidden');
-        }
-    });
-
-    document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') {
-            userMenu.classList.add('hidden');
-        }
-    });
-
-    $(document).ready(function() {
-        $('#applicationForm').submit(function(event) {
-            event.preventDefault();
-
-            var csrfToken = $("meta[name='_csrf']").attr("content");
-            var csrfHeader = $("meta[name='_csrf_header']").attr("content");
-
-            var name = $('#name').val();
-            var phone = $('#phoneNum').val();
-            var course = $('#course').val();
-
-            // Проверка, что поля не пустые
-            if (!name || !phone || !course) {
-                alert('Заполните все поля');
-                return;
-            }
-
-            var formData = {
-                name: $('#name').val(),
-                phone: $('#phoneNum').val(),
-                course: $('#course').val()
-            };
-
-            console.log(formData);
-
-            $.ajax({
-                url: '/application',
-                method: 'POST',
-                data: JSON.stringify(formData),
-                contentType: 'application/json',
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader(csrfHeader, csrfToken);
-                },
-                success: function(data) {
-                    console.log('Серверный ответ:', data);
-
-                    $('#name').val('');     // Очистить поле name
-                    $('#phoneNum').val(''); // Очистить поле phoneNum
-                    $('#course').val('');   // Сбросить выбор в поле course
-
-                    $('#message').text('Ваша заявка принята, мы скоро с вами свяжемся');
-                },
-                error: function(xhr, status, error) {
-                    console.error('Произошла ошибка при отправке заявки:', error);
-                }
-            });
-        });
-    });
-
-</script>
-
 </body>
 </html>

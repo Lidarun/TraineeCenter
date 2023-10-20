@@ -25,6 +25,40 @@ public class HomeController {
     public String home(Model model,
                        @AuthenticationPrincipal OAuth2User oAuth2User,
                        @AuthenticationPrincipal UserDetails userDetails) {
+        model = getUserName(model, oAuth2User, userDetails);
+
+        return "index";
+    }
+
+    @GetMapping("/ort-course")
+    public String shopOrtCoursePage(Model model,
+                       @AuthenticationPrincipal OAuth2User oAuth2User,
+                       @AuthenticationPrincipal UserDetails userDetails) {
+        model = getUserName(model, oAuth2User, userDetails);
+
+        return "ort-course";
+    }
+
+    @GetMapping("/computer-course")
+    public String shopPcCoursePage(Model model,
+                                    @AuthenticationPrincipal OAuth2User oAuth2User,
+                                    @AuthenticationPrincipal UserDetails userDetails) {
+        model = getUserName(model, oAuth2User, userDetails);
+
+        return "computer-course";
+    }
+
+
+    @PostMapping("/application")
+    public ResponseEntity<?> getApplication(@RequestBody Application application) {
+        applicationService.create(application);
+        return new ResponseEntity<>("SUCCESS", HttpStatus.OK);
+    }
+
+
+    private Model getUserName(Model model,
+                              OAuth2User oAuth2User, UserDetails userDetails) {
+
         if (oAuth2User != null) {
             String name = oAuth2User.getAttribute("name");
             model.addAttribute("name", name);
@@ -38,13 +72,7 @@ public class HomeController {
             }
         }
 
-        return "index";
+        return model;
     }
-
-    @PostMapping("/application")
-    public ResponseEntity<?> getApplication(@RequestBody Application application) {
-        applicationService.create(application);
-        return new ResponseEntity<>("SUCCESS", HttpStatus.OK);
-    }
-
 }
+

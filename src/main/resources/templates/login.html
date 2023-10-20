@@ -7,7 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+<div th:replace="~{parts/header :: header}"></div>
+
+<div class="flex min-h-full flex-col justify-center px-6 py-28 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
         <img class="mx-auto h-13 w-auto" th:src="@{/img/java-logo.png}" alt="Your Company">
         <h2 sec:authorize="!isAuthenticated()"
