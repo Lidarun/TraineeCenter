@@ -36,7 +36,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/css/**", "/img/**", "/js/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/application").permitAll()
-                        .requestMatchers("/", "/registration","/reset-password", "/computer-course", "ort-course").permitAll()
+                        .requestMatchers("/", "/registration","/reset-password", "/computer-course",
+                                "/ort-course", "/ort-trial-test").permitAll()
                         .requestMatchers("/dashboard/**").hasAnyRole ("SUPER_ADMIN", "ADMIN", "TEACHER")
                         .anyRequest().authenticated()
                 )
