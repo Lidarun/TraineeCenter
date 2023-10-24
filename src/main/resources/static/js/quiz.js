@@ -136,7 +136,9 @@ function restartQuiz(){
 }
 
 function sendUserAnswersToServer() {
-    const userAnswerObject = Object.fromEntries(userAnswer);
+    const userAnswerObject = JSON.parse(sessionStorage.getItem("TrialUser"));
+
+    userAnswerObject.result = correctScore;
 
     // Получение CSRF токена из мета-тегов
     const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');

@@ -2,6 +2,7 @@ package com.sanjar.trainingcenter.controller;
 
 import com.sanjar.trainingcenter.dto.PromoCodeRequest;
 import com.sanjar.trainingcenter.dto.QuestionDto;
+import com.sanjar.trainingcenter.dto.TrialUserRequest;
 import com.sanjar.trainingcenter.model.Course;
 import com.sanjar.trainingcenter.model.TrialUser;
 import com.sanjar.trainingcenter.service.QuestionService;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -39,17 +41,17 @@ public class TrialTestController {
         options.add("dafdsfads");
         options.add("dafdsfads");
         QuestionDto dto = new QuestionDto(1, "asdfasdf", "asdfasdfasdf", options);
-        QuestionDto dto2 = new QuestionDto(2, "asdfasdf", "asdfasdfasdf", options);
 
         questions.add(dto);
-        questions.add(dto2);
         return new ResponseEntity<>(questions, HttpStatus.OK);
     }
 
-//    @PostMapping("/ort") //TODO
-//    public ResponseEntity<?> getTrialTestResults(@ResponseBody ) {
-//
-//    }
+    @ResponseBody
+    @PostMapping("/ort")
+    public ResponseEntity<?> getTrialTestResults(@RequestBody TrialUserRequest user) {
+        System.out.println(user);
+        return null;
+    }
 
     @ResponseBody
     @PostMapping("/check-promo")
