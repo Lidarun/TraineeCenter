@@ -35,11 +35,9 @@ public class SecurityConfig {
                 )
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/css/**", "/img/**", "/js/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/application").permitAll()
-                        .requestMatchers("/", "/registration","/reset-password", "/computer-course",
-                                "/ort-course", "/ort-trial-test").permitAll()
+                        .requestMatchers("/dashboard/**").authenticated()
                         .requestMatchers("/dashboard/**").hasAnyRole ("SUPER_ADMIN", "ADMIN", "TEACHER")
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 )
                 .formLogin(form -> form.
                         loginPage("/login")

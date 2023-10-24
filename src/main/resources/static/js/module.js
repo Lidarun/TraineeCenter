@@ -1,5 +1,7 @@
 $(document).ready(function () {
     var questionsArray = new Array();
+    const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+    const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
 
     $(document).on("click", "#ort-test-link", function (event) {
         event.preventDefault();
@@ -14,6 +16,9 @@ $(document).ready(function () {
             url: "/trial-test/ort",
             type: "GET",
             dataType: "json",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(csrfHeader, csrfToken);
+            },
             success: function (questions) {
                 questionsArray = questions;
                 sessionStorage.setItem("questionsArray", JSON.stringify(questions));

@@ -1,17 +1,21 @@
 package com.sanjar.trainingcenter.controller;
 
+import com.sanjar.trainingcenter.dto.PromoCodeRequest;
 import com.sanjar.trainingcenter.dto.QuestionDto;
+import com.sanjar.trainingcenter.model.Course;
+import com.sanjar.trainingcenter.model.TrialUser;
 import com.sanjar.trainingcenter.service.QuestionService;
+import com.sanjar.trainingcenter.service.TrialUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -19,7 +23,13 @@ import java.util.List;
 public class TrialTestController {
 
     private final QuestionService questionService;
+    private final TrialUserService trialUserService;
 //    private final ResultHandler resultHandler;
+
+    @GetMapping
+    private String showPage(Model model) {
+        return "trial-test";
+    }
 
     @GetMapping("/ort")
     public ResponseEntity<List<QuestionDto>> getTrialQuestions() {
@@ -35,6 +45,28 @@ public class TrialTestController {
         questions.add(dto2);
         return new ResponseEntity<>(questions, HttpStatus.OK);
     }
+
+//    @PostMapping("/ort") //TODO
+//    public ResponseEntity<?> getTrialTestResults(@ResponseBody ) {
+//
+//    }
+
+    @ResponseBody
+    @PostMapping("/check-promo")
+    private ResponseEntity<?> checkPromoCode(@RequestBody PromoCodeRequest promoCodeRequest) {
+        String token = promoCodeRequest.getToken();
+        Optional<TrialUser> userOptional = trialUserService.findByPromoCode(token);
+
+        if (userOptional.isPresent()) {
+            TrialUser user = userOptional.get();
+            return ResponseEntity.ok(user);
+        } else {
+            return new ResponseEntity<>("Промокод не найден", HttpStatus.NOT_FOUND);
+        }
+    }
+
+
+
 
     @GetMapping("/{courseId}/module/{moduleId}")
     public ResponseEntity<List<QuestionDto>> getQuestionsByCourse(@PathVariable("courseId") long courseId,

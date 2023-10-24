@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>Введите промокод</title>
+</head>
+<body>
+<div id="contactUs"
+     class="relative flex items-top justify-center min-h-screen bg-white dark:bg-gray-900 sm:items-center sm:pt-0">
+    <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
+        <div id="promo-validation-message" class="relative flex justify-center text-2xl font-semibold text-sky-400/100"
+             style="display: none; margin-left: 15%">
+            Промокод не найден. Обратитесь к администратору.
+        </div>
+
+        <!-- component -->
+        <div class="flex flex-col max-w-4xl md:h-56 bg-white rounded-lg shadow-lg overflow-hidden md:flex-row my-10">
+            <div class="md:flex items-center justify-center md:w-1/2 md:bg-gray-700">
+                <div class="py-6 px-8 md:py-0">
+                    <h2 class="text-gray-700 text-2xl font-bold md:text-gray-100">Введите промокод</h2>
+                    <p class="mt-2 text-gray-600 md:text-gray-400">Чтобы приступить к тесту введите промокод полученный
+                        от администратора курса</p>
+                </div>
+            </div>
+            <div class="flex items-center justify-center pb-6 md:py-0 md:w-1/2 md:border-b-8 border-gray-700">
+                <form id="promo-form">
+                    <div class="flex flex-col rounded-lg overflow-hidden sm:flex-row">
+                        <input id="promo-input"
+                               class="py-3 px-4 bg-gray-200 text-gray-800 border-gray-300 border-2 outline-none placeholder-gray-500 focus:bg-gray-100"
+                               type="text" name="promo" placeholder="Промокод">
+                        <button class="py-3 px-4 bg-gray-700 text-gray-100 font-semibold uppercase hover:bg-gray-600"
+                                type="submit">
+                            ОК
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/trialtest.js}"></script>
+</body>
+</html>
+<!--<a aria-label="add to slack"-->
+<!--   href="/trial-test"-->
+<!--   id="ort-test-link"-->
+<!--   class="p-4 border border-gray-200 dark:bg-gray-800 dark:border-gray-700 rounded-full duration-300 hover:border-cyan-400 hover:shadow-lg hover:shadow-cyan-600/20 dark:hover:border-cyan-300/30 module-link"-->
+<!--   data-ort-test-link="YOUR_MODULE_ID">-->
