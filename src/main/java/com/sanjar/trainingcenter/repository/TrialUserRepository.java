@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface TrialUserRepository extends JpaRepository<TrialUser, Long> {
     Optional<TrialUser> findByToken(String token);
+    Optional<TrialUser> findByTokenAndResultEquals(String token, int result);
 }

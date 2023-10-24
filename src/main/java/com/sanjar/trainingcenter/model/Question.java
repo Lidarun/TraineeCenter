@@ -50,6 +50,9 @@ public class Question implements Serializable {
     @NotEmpty
     private String answerExplain;
 
+    @NotEmpty
+    private int score;
+
     public Question() {
         this.options = new ArrayList<>();
     }

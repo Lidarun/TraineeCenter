@@ -15,6 +15,7 @@ public class QuestionMapperImpl implements EntityMapper<Question, QuestionDto> {
         dto.setId(question.getId());
         dto.setQuestion(question.getQuestion());
         dto.setCorrectAnswer(question.getOptions().get(question.getCorrectAnswer()));
+        dto.setScore(question.getScore());
 
         question.getOptions().remove((int) question.getCorrectAnswer());
         dto.setOptions(question.getOptions()) ;

@@ -9,8 +9,11 @@ const _totalQuestion = document.getElementById('total-question');
 
 let array = JSON.parse(sessionStorage.getItem("questionsArray"));
 
-let correctAnswer = "", correctScore = askedCount = 0;
+let correctAnswer = "", askedCount = 0;
 const totalQuestion = array.length;
+
+let correctScore = 0;
+let score = 0;
 
 let userAnswer = new Map;
 let questionID;
@@ -45,8 +48,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // display question and options
 function showQuestion(data){
+    console.log(data)
     _checkBtn.disabled = false;
     correctAnswer = data.correctAnswer;
+    score = data.score;
     let incorrectAnswer = data.options;
     let optionsList = incorrectAnswer;
     optionsList.splice(Math.floor(Math.random() * (incorrectAnswer.length + 1)), 0, correctAnswer);
@@ -82,7 +87,7 @@ function checkAnswer(){
         userAnswer.set(questionID, selectedAnswer);
 
         if(selectedAnswer === HTMLDecode(correctAnswer)){
-            correctScore++;
+            correctScore += score;
             _result.innerHTML = `<p><i class = "fas fa-check"></i>Верно!</p>`;
         } else {
             _result.innerHTML = `<p><i class = "fas fa-times"></i>Неверно!</p><small><b>Правильный ответ: </b>${correctAnswer}</small>`;
@@ -128,6 +133,7 @@ function setCount(){
 
 function restartQuiz(){
     correctScore = askedCount = 0;
+    score = 0;
     _playAgainBtn.style.display = "none";
     _checkBtn.style.display = "block";
     _checkBtn.disabled = false;
@@ -156,7 +162,7 @@ function sendUserAnswersToServer() {
     fetch('/trial-test/ort', requestOptions)
         .then(response => response.text()) // Parse the response as text
         .then(data => {
-            console.log(data); // The response will be the plain text "Ответы приняты успешно"
+            console.log(data);
         })
         .catch(error => {
             console.error('Error sending user answers:', error);

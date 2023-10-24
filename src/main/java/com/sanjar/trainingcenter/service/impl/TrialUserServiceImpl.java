@@ -1,5 +1,6 @@
 package com.sanjar.trainingcenter.service.impl;
 
+import com.sanjar.trainingcenter.dto.TrialUserRequest;
 import com.sanjar.trainingcenter.model.TrialUser;
 import com.sanjar.trainingcenter.repository.TrialUserRepository;
 import com.sanjar.trainingcenter.service.TrialUserService;
@@ -36,6 +37,16 @@ public class TrialUserServiceImpl implements TrialUserService {
 
     @Override
     public Optional<TrialUser> findByPromoCode(String promoCode) {
-        return trialUserRepository.findByToken(promoCode);
+        return trialUserRepository.findByTokenAndResultEquals(promoCode,  0);
+    }
+
+    @Override
+    public void setResult(TrialUserRequest user) {
+        Optional<TrialUser> trialUser = trialUserRepository.findById(user.getId());
+
+        if (trialUser.isPresent()) {
+            trialUser.get().setResult(user.getResult());
+            trialUserRepository.save(trialUser.get());
+        }
     }
 }

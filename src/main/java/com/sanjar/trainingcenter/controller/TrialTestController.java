@@ -3,7 +3,6 @@ package com.sanjar.trainingcenter.controller;
 import com.sanjar.trainingcenter.dto.PromoCodeRequest;
 import com.sanjar.trainingcenter.dto.QuestionDto;
 import com.sanjar.trainingcenter.dto.TrialUserRequest;
-import com.sanjar.trainingcenter.model.Course;
 import com.sanjar.trainingcenter.model.TrialUser;
 import com.sanjar.trainingcenter.service.QuestionService;
 import com.sanjar.trainingcenter.service.TrialUserService;
@@ -11,12 +10,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -26,31 +22,26 @@ public class TrialTestController {
 
     private final QuestionService questionService;
     private final TrialUserService trialUserService;
-//    private final ResultHandler resultHandler;
 
     @GetMapping
-    private String showPage(Model model) {
+    private String showPage() {
         return "trial-test";
     }
 
     @GetMapping("/ort")
     public ResponseEntity<List<QuestionDto>> getTrialQuestions() {
-        List<QuestionDto> questions = questionService.findAllByModuleID(999);
-        List<String> options = new ArrayList<>();
-        options.add("dafdsfads");
-        options.add("dafdsfads");
-        options.add("dafdsfads");
-        QuestionDto dto = new QuestionDto(1, "asdfasdf", "asdfasdfasdf", options);
+        List<QuestionDto> questions = questionService.findAllByModuleID(2);
 
-        questions.add(dto);
+        System.out.println(questions);
+
         return new ResponseEntity<>(questions, HttpStatus.OK);
     }
 
     @ResponseBody
     @PostMapping("/ort")
     public ResponseEntity<?> getTrialTestResults(@RequestBody TrialUserRequest user) {
-        System.out.println(user);
-        return null;
+        trialUserService.setResult(user);
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @ResponseBody
@@ -78,13 +69,4 @@ public class TrialTestController {
         return new ResponseEntity<>(questions, HttpStatus.OK);
     }
 
-
-//    @PostMapping()
-//    public ResponseEntity<?> submitAnswer(@RequestBody Map<Integer, String> userAnswers,
-//                                          Authentication authentication) {
-//
-//        resultHandler.setResults(userAnswers, authentication);
-//
-//        return new ResponseEntity<>("Ответы приняты успешно", HttpStatus.OK);
-//    }
 }

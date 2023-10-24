@@ -444,8 +444,7 @@
                                     </div>
 
                                     <button id="addOptionButton" type="button"
-                                            class="block mt-2 text-sm bg-blue-500 text-white px-2 py-1 rounded">Добавить
-                                        вариант
+                                            class="block mt-2 text-sm bg-blue-500 text-white px-2 py-1 rounded">Добавить вариант
                                     </button>
 
                                     <!-- Correct var-->
@@ -454,6 +453,13 @@
                                                type="text" th:field="*{correctAnswer}" placeholder="Укажите номер правильного варианта"
                                                th:classappend="${#fields.hasErrors('correctAnswer')} ? 'error-border' : ''"
                                                id="correctAnswerInput" oninput="validateCorrectAnswer()">
+                                    </label>
+
+                                    <!-- Correct var-->
+                                    <label class="block text-sm">
+                                        <input class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                                               type="number" th:field="*{score}" placeholder="Количество баллов за правильный ответ"
+                                               th:classappend="${#fields.hasErrors('score')} ? 'error-border' : ''">
                                     </label>
 
 

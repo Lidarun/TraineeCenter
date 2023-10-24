@@ -17,6 +17,7 @@ public class QuestionDto implements Serializable {
     private String question;
     private String correctAnswer;
     private List<String> options;
+    private int score;
 
     @Override
     public String toString() {
