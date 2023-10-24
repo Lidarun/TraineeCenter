@@ -28,13 +28,14 @@ public class Module implements Serializable {
     private boolean state = false;
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "module")
+    @OneToMany(fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL, mappedBy = "module")
     private List<Question> questions;
 
     @JsonIgnore
     @NotNull
     @ManyToOne(optional = false, fetch = FetchType.EAGER,
-            cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
+             cascade = CascadeType.REMOVE)
     @JoinColumn(name = "course_id")
     private Course course;
 

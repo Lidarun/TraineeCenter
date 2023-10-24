@@ -31,12 +31,11 @@ public class Course {
     @JoinTable(
             name = "tb_users_courses",
             joinColumns = @JoinColumn(name = "course_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<User> users;
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "course")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "course")
     List<Module> modules;
 
     @Override

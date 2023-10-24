@@ -34,7 +34,6 @@ public class TrialTestController {
         questions.add(dto);
         questions.add(dto2);
         return new ResponseEntity<>(questions, HttpStatus.OK);
-//        return ResponseEntity.ok("NUR");
     }
 
     @GetMapping("/{courseId}/module/{moduleId}")

@@ -29,7 +29,7 @@ public class Question implements Serializable {
     @NotNull
     @JsonIgnore
     @ManyToOne(optional = false, fetch = FetchType.EAGER,
-            cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
+            cascade = CascadeType.REMOVE)
     @JoinColumn(name = "module_id")
     Module module;
 

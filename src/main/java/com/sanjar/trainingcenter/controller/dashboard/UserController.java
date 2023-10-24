@@ -27,7 +27,7 @@ public class UserController {
         model.addAttribute("users", userList);
         model.addAttribute("role", Role.ROLE_SUPER_ADMIN);
 
-        return "dashboard/dashboard";
+        return "dashboard/user";
     }
 
     @GetMapping("/update")

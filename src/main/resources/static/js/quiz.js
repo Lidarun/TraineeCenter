@@ -135,28 +135,28 @@ function restartQuiz(){
     loadQuestion().then(r => loadQuestion());
 }
 
-function sendUserAnswersToServer() {
-    const userAnswerObject = Object.fromEntries(userAnswer);
-
-    // Получение CSRF токена из мета-тегов
-    const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
-    const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
-
-    const requestOptions = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            [csrfHeader]: csrfToken
-        },
-        body: JSON.stringify(userAnswerObject)
-    };
-
-    fetch('/quiz', requestOptions)
-        .then(response => response.text()) // Parse the response as text
-        .then(data => {
-            console.log(data); // The response will be the plain text "Ответы приняты успешно"
-        })
-        .catch(error => {
-            console.error('Error sending user answers:', error);
-        });
-}
+// function sendUserAnswersToServer() {
+//     const userAnswerObject = Object.fromEntries(userAnswer);
+//
+//     // Получение CSRF токена из мета-тегов
+//     const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+//     const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
+//
+//     const requestOptions = {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//             [csrfHeader]: csrfToken
+//         },
+//         body: JSON.stringify(userAnswerObject)
+//     };
+//
+//     fetch('/quiz', requestOptions)
+//         .then(response => response.text()) // Parse the response as text
+//         .then(data => {
+//             console.log(data); // The response will be the plain text "Ответы приняты успешно"
+//         })
+//         .catch(error => {
+//             console.error('Error sending user answers:', error);
+//         });
+// }

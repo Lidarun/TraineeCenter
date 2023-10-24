@@ -54,11 +54,13 @@ public class ModuleController {
     private String createModule(@ModelAttribute("formModule") @Valid Module module,
                                 BindingResult result,
                                 Model model) {
+
         if (result.hasErrors()) {
             model.addAttribute("courses", courseService.findAll());
             return "dashboard/module";
         }
 
+        moduleService.updateCache();
         moduleService.create(module);
 
         return "redirect:/dashboard/module";
@@ -68,6 +70,7 @@ public class ModuleController {
     public String updateCourse(@PathVariable("id") long id,
                                @ModelAttribute("formModule") Module updatedModule) {
 
+        moduleService.updateCache();
         moduleService.update(id, updatedModule);
 
         return "redirect:/dashboard/module";
@@ -75,7 +78,7 @@ public class ModuleController {
 
     @PostMapping("/delete/{id}")
     private String deleteCourse(@PathVariable("id") long id) {
-
+        moduleService.updateCache();
         moduleService.deleteById(id);
 
         return "redirect:/dashboard/module";
