@@ -11,4 +11,5 @@ public interface TrialUserService extends CrudService<TrialUser> {
     void setResult(TrialUserRequest user);
     void update(long id, TrialUser trialUser);
     List<TrialUser> updateCache();
+    List<TrialUser> getTopStudentsByResult(int count);
 }

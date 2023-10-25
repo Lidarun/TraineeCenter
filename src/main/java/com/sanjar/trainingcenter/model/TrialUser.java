@@ -19,5 +19,6 @@ public class TrialUser implements Serializable {
     private String fullName;
     private String phone;
     private String token;
+    private String medalImage;
     private int result = 0;
 }

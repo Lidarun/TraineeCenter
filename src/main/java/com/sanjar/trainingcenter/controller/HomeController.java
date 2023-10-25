@@ -1,8 +1,10 @@
 package com.sanjar.trainingcenter.controller;
 
 import com.sanjar.trainingcenter.model.Application;
+import com.sanjar.trainingcenter.model.TrialUser;
 import com.sanjar.trainingcenter.model.User;
 import com.sanjar.trainingcenter.service.ApplicationService;
+import com.sanjar.trainingcenter.service.TrialUserService;
 import com.sanjar.trainingcenter.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,17 +16,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/")
 @RequiredArgsConstructor
 public class HomeController {
     private final UserService userService;
     private final ApplicationService applicationService;
+    private final TrialUserService trialUserService;
 
     @GetMapping
     public String home(Model model,
                        @AuthenticationPrincipal OAuth2User oAuth2User,
                        @AuthenticationPrincipal UserDetails userDetails) {
+        List<TrialUser> rating = trialUserService.getTopStudentsByResult(10);
+        model.addAttribute("rating", rating);
         model = getUserName(model, oAuth2User, userDetails);
 
         return "index";

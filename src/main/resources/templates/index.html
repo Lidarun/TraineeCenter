@@ -8,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="" th:href="@{/css/index.css}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
     <script th:src="@{/js/contact.js}"></script>
     <script th:src="@{/js/module.js}"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -70,7 +71,8 @@
                     <div class="relative ml-3" sec:authorize="isAuthenticated()">
                         <button type="button"
                                 class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                                id="user-menu-btn" aria-expanded="false" aria-haspopup="true" onclick="toggleUserMenu()">
+                                id="user-menu-btn" aria-expanded="false" aria-haspopup="true"
+                                onclick="toggleUserMenu()">
                             <span class="absolute -inset-1.5"></span>
                             <span class="sr-only">Open user menu</span>
                             <img class="h-8 w-8 rounded-full"
@@ -81,7 +83,8 @@
                              class="hidden absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                              role="menu" aria-orientation="vertical" tabindex="-1">
                             <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem">Мой профиль</a>
-                            <a href="/dashboard/user" sec:authorize="hasAnyRole('ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_TEACHER')"
+                            <a href="/dashboard/user"
+                               sec:authorize="hasAnyRole('ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_TEACHER')"
                                class="block px-4 py-2 text-sm text-gray-700" role="menuitem">Админ панель</a>
                             <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem">Настройки</a>
                             <a href="/logout" class="block px-4 py-2 text-sm text-gray-700" role="menuitem">Выход</a>
@@ -111,7 +114,7 @@
                     <a aria-label="add to slack"
                        href="/trial-test"
                        class="p-4 border border-gray-200 dark:bg-gray-800 dark:border-gray-700 rounded-full duration-300 hover:border-cyan-400 hover:shadow-lg hover:shadow-cyan-600/20 dark:hover:border-cyan-300/30 module-link"
-                       >
+                    >
                         <div class="flex justify-center space-x-4">
                             <img class="w-6 h-6"
                                  src="https://cdn.icon-icons.com/icons2/2466/PNG/512/blood_test_icon_149291.png"
@@ -163,36 +166,96 @@
     </h1>
     <div class="container m-auto px-6 text-gray-500 md:px-12 xl:px-0">
         <div class="mx-auto grid gap-6 md:w-3/4 lg:w-full lg:grid-cols-3">
-<!--            <div class="bg-white rounded-2xl shadow-xl px-8 py-12 sm:px-12 lg:px-8">-->
-<!--                <div class="mb-12 space-y-4">-->
-<!--                    <h3 class="text-2xl font-semibold text-purple-900">Graphic Design</h3>-->
-<!--                    <p class="mb-6">Obcaecati, quam? Eligendi, nulla numquam natus laborum porro at cum, consectetur ullam tempora ipsa iste officia sed officiis! Incidunt ea animi officiis.</p>-->
-<!--                    <a href="#" class="block font-medium text-purple-600">Узнать больше...</a>-->
-<!--                </div>-->
-<!--                <img src="https://tailus.io/sources/blocks/end-image/preview/images/graphic.svg" class="w-2/3 ml-auto -mb-12" alt="illustration" loading="lazy" width="900" height="600">-->
-<!--            </div>-->
+            <!--            <div class="bg-white rounded-2xl shadow-xl px-8 py-12 sm:px-12 lg:px-8">-->
+            <!--                <div class="mb-12 space-y-4">-->
+            <!--                    <h3 class="text-2xl font-semibold text-purple-900">Graphic Design</h3>-->
+            <!--                    <p class="mb-6">Obcaecati, quam? Eligendi, nulla numquam natus laborum porro at cum, consectetur ullam tempora ipsa iste officia sed officiis! Incidunt ea animi officiis.</p>-->
+            <!--                    <a href="#" class="block font-medium text-purple-600">Узнать больше...</a>-->
+            <!--                </div>-->
+            <!--                <img src="https://tailus.io/sources/blocks/end-image/preview/images/graphic.svg" class="w-2/3 ml-auto -mb-12" alt="illustration" loading="lazy" width="900" height="600">-->
+            <!--            </div>-->
             <div class="bg-white rounded-2xl shadow-xl px-8 py-12 sm:px-12 lg:px-8">
                 <div class="mb-12 space-y-4">
                     <h3 class="text-2xl font-semibold text-purple-900">Компьютерные курсы</h3>
-                    <p class="mb-6">Obcaecati, quam? Eligendi, nulla numquam natus laborum porro at cum, consectetur ullam tempora ipsa iste officia sed officiis! Incidunt ea animi officiis.</p>
+                    <p class="mb-6">Obcaecati, quam? Eligendi, nulla numquam natus laborum porro at cum, consectetur
+                        ullam tempora ipsa iste officia sed officiis! Incidunt ea animi officiis.</p>
                     <a href="/computer-course" class="block font-medium text-purple-600">Узнать больше...</a>
                 </div>
-                <img src="https://tailus.io/sources/blocks/end-image/preview/images/ui-design.svg" class="w-2/3 ml-auto" alt="illustration" loading="lazy" width="900" height="600">
+                <img src="https://tailus.io/sources/blocks/end-image/preview/images/ui-design.svg" class="w-2/3 ml-auto"
+                     alt="illustration" loading="lazy" width="900" height="600">
             </div>
             <div class="bg-white rounded-2xl shadow-xl px-8 py-12 sm:px-12 lg:px-8">
                 <div class="mb-12 space-y-4">
                     <h3 class="text-2xl font-semibold text-purple-900">Подготовка к ОРТ</h3>
-                    <p class="mb-6">Obcaecati, quam? Eligendi, nulla numquam natus laborum porro at cum, consectetur ullam tempora ipsa iste officia sed officiis! Incidunt ea animi officiis.</p>
+                    <p class="mb-6">Obcaecati, quam? Eligendi, nulla numquam natus laborum porro at cum, consectetur
+                        ullam tempora ipsa iste officia sed officiis! Incidunt ea animi officiis.</p>
                     <a href="/ort-course" class="block font-medium text-purple-600">Узнать больше...</a>
                 </div>
-                <img src="https://tailus.io/sources/blocks/end-image/preview/images/ux-design.svg" class="w-2/3 ml-auto " alt="illustration" loading="lazy" width="900" height="600">
+                <img src="https://tailus.io/sources/blocks/end-image/preview/images/ux-design.svg"
+                     class="w-2/3 ml-auto " alt="illustration" loading="lazy" width="900" height="600">
             </div>
         </div>
     </div>
 </div>
 
+<!-- TOP -->
+<div id="rating" class="flex flex-col justify-center items-center h-[100vh]">
+    <div class="relative flex max-w-[700px] h-[700px] w-full flex-col rounded-[10px] border-[1px] border-gray-200 bg-white bg-clip-border shadow-md shadow-[#F3F3F3] dark:border-[#ffffff33] dark:!bg-navy-800 dark:text-white dark:shadow-none">
+        <div class="flex h-fit w-full items-center justify-between rounded-t-2xl bg-white px-4 pb-[20px] pt-4 shadow-2xl shadow-gray-100 dark:!bg-navy-700 dark:shadow-none">
+            <h4 class="text-lg font-bold text-black">
+                Топ
+            </h4>
+            <button class="linear rounded-[20px] bg-lightPrimary px-4 py-2 text-base font-medium text-brand-500 transition duration-200 hover:bg-gray-100 active:bg-gray-200 dark:bg-white/5 dark:text-blue-700 dark:hover:bg-white/10 dark:active:bg-white/20">
+                See all
+            </button>
+        </div>
+        <div class="w-full overflow-x-scroll px-4 md:overflow-x-hidden">
+            <table role="table" class="w-full min-w-[800px] overflow-x-scroll">
+                <thead>
+                <tr role="row">
+                    <th colspan="1"
+                        role="columnheader"
+                        title="Toggle SortBy"
+                        style="cursor: pointer">
+                        <div class="flex items-center justify-between pl-10 pb-2 pt-4 text-start uppercase tracking-wide text-gray-600 sm:text-xs lg:text-xs">
+                            ФИО
+                        </div>
+                    </th>
+                    <th colspan="1"
+                        role="columnheader"
+                        title="Toggle SortBy"
+                        style="cursor: pointer">
+                        <div class="flex items-center justify-between pb-2 pt-4 text-start uppercase tracking-wide text-gray-600 sm:text-xs lg:text-xs">
+                            Результат
+                        </div>
+                    </th>
+                </tr>
+                </thead>
+                <tbody role="rowgroup" class="px-4">
+                <tr role="row" th:each="user : ${rating}">
+                    <td class="py-3 text-sm" role="cell">
+                        <div class="flex items-center gap-2">
+                            <div class="h-[30px] w-[30px] rounded-full">
+                                <img th:src="@{${user.getMedalImage()}}" loading="eager"
+                                        class="h-full w-full rounded-full"
+                                        alt=""/>
+                            </div>
+                            <p class="text-sm font-medium text-black"  th:text="${user.getFullName()}"></p>
+                        </div>
+                    </td>
+                    <td class="py-3 text-sm" role="cell">
+                        <p class="text-md font-medium text-black"  th:text="${user.getResult()}"></p>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
 <!-- Contact us -->
-<div id="contactUs" class="relative flex items-top justify-center min-h-screen bg-white dark:bg-gray-900 sm:items-center sm:pt-0">
+<div id="contactUs"
+     class="relative flex items-top justify-center min-h-screen bg-white dark:bg-gray-900 sm:items-center sm:pt-0">
     <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
         <div class="relative flex justify-center text-2xl font-semibold text-sky-400/100" id="message"></div>
 
@@ -207,9 +270,12 @@
                     </p>
 
                     <div class="flex items-center mt-8 text-gray-600 dark:text-gray-400">
-                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                             stroke-width="1.5" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                         </svg>
                         <div class="ml-4 text-md tracking-wide font-semibold w-40">
                             Acme Inc, Street, State,
@@ -218,8 +284,10 @@
                     </div>
 
                     <div class="flex items-center mt-4 text-gray-600 dark:text-gray-400">
-                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                             stroke-width="1.5" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
                         </svg>
                         <div class="ml-4 text-md tracking-wide font-semibold w-40">
                             +44 1234567890
@@ -227,8 +295,10 @@
                     </div>
 
                     <div class="flex items-center mt-2 text-gray-600 dark:text-gray-400">
-                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                             stroke-width="1.5" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                         </svg>
                         <div class="ml-4 text-md tracking-wide font-semibold w-40">
                             info@acme.org
@@ -239,21 +309,30 @@
                 <form class="p-6 flex flex-col justify-center" id="applicationForm">
                     <div class="flex flex-col">
                         <label for="name" class="hidden">ФИО</label>
-                        <input type="text" name="name" id="name" placeholder="ФИО" class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-white font-semibold focus:border-indigo-500 focus:outline-none">
+                        <input type="text" name="name" id="name" placeholder="ФИО"
+                               class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-white font-semibold focus:border-indigo-500 focus:outline-none">
                     </div>
                     <div class="flex flex-col mt-2">
                         <label for="phoneNum" class="hidden">Номер телефона</label>
-                        <input type="text" name="phoneNum" id="phoneNum" placeholder="Номер телефона" class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-white font-semibold focus:border-indigo-500 focus:outline-none">
+                        <input type="text" name="phoneNum" id="phoneNum" placeholder="Номер телефона"
+                               class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-white font-semibold focus:border-indigo-500 focus:outline-none">
                     </div>
                     <div class="flex flex-col mt-2">
-                        <label for="course" class="text-normal text-lg font-medium text-gray-600 dark:text-gray-400 mt-2"></label>
-                        <select name="course" id="course" class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-white font-semibold focus:border-indigo-500 focus:outline-none">
+                        <label for="course"
+                               class="text-normal text-lg font-medium text-gray-600 dark:text-gray-400 mt-2"></label>
+                        <select name="course" id="course"
+                                class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-white font-semibold focus:border-indigo-500 focus:outline-none">
                             <option value="" selected disabled hidden>Выберите курс</option>
-                            <option class="text-normal text-lg font-medium text-white dark:text-gray-400 mt-2" value="Компьютерные курсы">Компьютерные курсы</option>
-                            <option class="text-normal text-lg font-medium text-white dark:text-gray-400 mt-2" value="Подготовка к ОРТ">Подготовка к ОРТ</option>
+                            <option class="text-normal text-lg font-medium text-white dark:text-gray-400 mt-2"
+                                    value="Компьютерные курсы">Компьютерные курсы
+                            </option>
+                            <option class="text-normal text-lg font-medium text-white dark:text-gray-400 mt-2"
+                                    value="Подготовка к ОРТ">Подготовка к ОРТ
+                            </option>
                         </select>
                     </div>
-                    <button type="submit" class="md:w-32 bg-indigo-600 hover:bg-blue-dark text-white font-bold py-3 px-6 rounded-lg mt-3 hover:bg-indigo-500 transition ease-in-out duration-300">
+                    <button type="submit"
+                            class="md:w-32 bg-indigo-600 hover:bg-blue-dark text-white font-bold py-3 px-6 rounded-lg mt-3 hover:bg-indigo-500 transition ease-in-out duration-300">
                         Отправить
                     </button>
                 </form>
