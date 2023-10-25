@@ -5,6 +5,8 @@ import com.sanjar.trainingcenter.model.TrialUser;
 import com.sanjar.trainingcenter.repository.TrialUserRepository;
 import com.sanjar.trainingcenter.service.TrialUserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +23,14 @@ public class TrialUserServiceImpl implements TrialUserService {
     }
 
     @Override
+    @Cacheable(cacheNames = "trial-users")
     public List<TrialUser> findAll() {
+        return trialUserRepository.findAll();
+    }
+
+    @Override
+    @CachePut(cacheNames = "trial-users")
+    public List<TrialUser> updateCache() {
         return trialUserRepository.findAll();
     }
 
@@ -48,5 +57,13 @@ public class TrialUserServiceImpl implements TrialUserService {
             trialUser.get().setResult(user.getResult());
             trialUserRepository.save(trialUser.get());
         }
+    }
+
+    @Override
+    public void update(long id, TrialUser trialUser) {
+        Optional<TrialUser> trialUserDB = trialUserRepository.findById(id);
+
+        if (trialUserDB.isPresent())
+            trialUserRepository.save(trialUser);
     }
 }
