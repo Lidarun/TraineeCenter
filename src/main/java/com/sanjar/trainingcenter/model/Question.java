@@ -50,8 +50,8 @@ public class Question implements Serializable {
     @NotEmpty
     private String answerExplain;
 
-    @NotEmpty
-    private int score;
+    @NotNull
+    private Integer score;
 
     public Question() {
         this.options = new ArrayList<>();

@@ -19,14 +19,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/")
 @RequiredArgsConstructor
 public class HomeController {
     private final UserService userService;
     private final ApplicationService applicationService;
     private final TrialUserService trialUserService;
 
-    @GetMapping
+    @GetMapping("/")
     public String home(Model model,
                        @AuthenticationPrincipal OAuth2User oAuth2User,
                        @AuthenticationPrincipal UserDetails userDetails) {
@@ -35,6 +34,15 @@ public class HomeController {
         model = getUserName(model, oAuth2User, userDetails);
 
         return "index";
+    }
+
+    @GetMapping("/top/{page}")
+    public String topList(@PathVariable int page,
+                          Model model) {
+        List<TrialUser> rating = trialUserService.findAll();
+        model.addAttribute("rating", rating);
+
+        return "top-list";
     }
 
     @GetMapping("/ort-course")

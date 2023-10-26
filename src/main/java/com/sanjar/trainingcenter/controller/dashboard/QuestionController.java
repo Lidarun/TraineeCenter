@@ -61,6 +61,8 @@ public class QuestionController {
                                  @ModelAttribute("formQuestion") @Valid Question question,
                                  BindingResult result, Model model) {
 
+        System.out.println(question);
+
         Page<Question> page = questionService.getItems(PageRequest.of(pageNum, 5));
 
         List<Question> list = page.getContent();
@@ -71,7 +73,7 @@ public class QuestionController {
         model.addAttribute("modules", moduleService.findAll());
         model.addAttribute("formQuestion", question);
         model.addAttribute("courses", courseService.findAll());
-//        model.addAttribute("modules", moduleService.findAll());
+        model.addAttribute("modules", moduleService.findAll());
 
         ObjectError error = service.checkFields(question);
         if (error != null)

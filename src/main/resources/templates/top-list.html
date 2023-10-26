@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Рейтинг</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+<div th:replace="~{parts/header :: header}"></div>
+
+<div id="rating" class="flex flex-col justify-center items-center h-[100vh]">
+    <div class="relative flex max-w-[700px] h-[700px] w-full flex-col rounded-[10px] border-[1px] border-gray-200 bg-white bg-clip-border shadow-md shadow-[#F3F3F3] dark:border-[#ffffff33] dark:!bg-navy-800 dark:text-white dark:shadow-none">
+        <div class="flex h-fit w-full items-center justify-between rounded-t-2xl bg-white px-4 pb-[20px] pt-4 shadow-2xl shadow-gray-100 dark:!bg-navy-700 dark:shadow-none">
+            <h4 class="text-2xl font-bold text-black">
+                Топ 10
+            </h4>
+            <a href="/top/0"
+               class="linear rounded-[20px] bg-lightPrimary px-4 py-2 text-lg font-medium text-brand-500 transition duration-200 hover:bg-gray-100 active:bg-gray-200 dark:bg-white/5 dark:text-blue-700 dark:hover:bg-white/10 dark:active:bg-white/20">
+                See all
+            </a>
+        </div>
+        <div class="w-full overflow-x-scroll px-4 md:overflow-x-hidden">
+            <table role="table" class="w-full min-w-[800px] overflow-x-scroll">
+                <thead>
+                <tr role="row">
+                    <th colspan="1"
+                        role="columnheader"
+                        title="Toggle SortBy"
+                        style="cursor: pointer">
+                        <div class="flex items-center justify-between pl-10 pb-2 pt-4 text-start uppercase tracking-wide text-black sm:text-xs lg:text-base">
+                            ФИО
+                        </div>
+                    </th>
+                    <th colspan="1"
+                        role="columnheader"
+                        title="Toggle SortBy"
+                        style="cursor: pointer">
+                        <div class="flex items-center justify-between pb-2 pt-4 text-start uppercase tracking-wide text-black sm:text-xs lg:text-base">
+                            Результат
+                        </div>
+                    </th>
+                </tr>
+                </thead>
+                <tbody role="rowgroup" class="px-4">
+                <tr role="row" th:each="user : ${rating}">
+                    <td class="py-3 text-lg" role="cell">
+                        <div class="flex items-center gap-2">
+                            <div class="h-[40px] w-[40px] rounded-full">
+                                <img th:src="@{${user.getMedalImage()}}" loading="eager"
+                                     class="h-full w-full rounded-full"
+                                     alt=""/>
+                            </div>
+                            <p class="text-lg font-medium text-black" th:text="${user.getFullName()}"></p>
+                        </div>
+                    </td>
+                    <td class="py-3 text-sm" role="cell">
+                        <p class="text-lg font-medium text-black" th:text="${user.getResult()}"></p>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

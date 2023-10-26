@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +24,7 @@ public class TrialUserServiceImpl implements TrialUserService {
 
     @Override
     public void create(TrialUser trialUser) {
+        trialUser.setToken(generatePromoCode());
         trialUserRepository.save(trialUser);
     }
 
@@ -60,7 +62,7 @@ public class TrialUserServiceImpl implements TrialUserService {
 
     @Override
     public Optional<TrialUser> findByPromoCode(String promoCode) {
-        return trialUserRepository.findByTokenAndResultEquals(promoCode,  0);
+        return trialUserRepository.findByTokenAndResultEquals(promoCode, 0);
     }
 
     @Override
@@ -73,7 +75,7 @@ public class TrialUserServiceImpl implements TrialUserService {
 
             medals.sort(Comparator.comparing(Medal::getScore).reversed());
 
-            String medal =  medals.stream()
+            String medal = medals.stream()
                     .filter(m -> result >= m.getScore())
                     .map(Medal::getMedalUrl)
                     .findFirst()
@@ -82,6 +84,7 @@ public class TrialUserServiceImpl implements TrialUserService {
 
             trialUser.get().setMedalImage(medal);
             trialUser.get().setResult(user.getResult());
+
             trialUserRepository.save(trialUser.get());
         }
     }
@@ -90,7 +93,18 @@ public class TrialUserServiceImpl implements TrialUserService {
     public void update(long id, TrialUser trialUser) {
         Optional<TrialUser> trialUserDB = trialUserRepository.findById(id);
 
-        if (trialUserDB.isPresent())
+        if (trialUserDB.isPresent()) {
+            trialUser.setToken(generatePromoCode());
+            trialUser.setMedalImage("https://wallpaperaccess.com/full/1556608.jpg");
             trialUserRepository.save(trialUser);
+        }
+    }
+
+
+    private String generatePromoCode() {
+        Random random = new Random();
+        int promoCode = random.nextInt(100_000, 999_999);
+
+        return String.valueOf(promoCode);
     }
 }

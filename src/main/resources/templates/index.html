@@ -6,7 +6,7 @@
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="" th:href="@{/css/index.css}">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <script th:src="@{/js/contact.js}"></script>
@@ -23,18 +23,24 @@
     <nav class="fixed z-20 w-full bg-white/90 dark:bg-gray-900/80 backdrop-blur navbar shadow-2xl shadow-gray-600/5 border-b border-gray-100 dark:border-gray-800 peer-checked:navbar-active dark:shadow-none">
         <div class="xl:container m-auto px-6 md:px-12 lg:px-6">
             <div class="flex flex-wrap items-center justify-between gap-6 md:py-3 md:gap-0 lg:py-5">
-                <div class="w-full items-center flex justify-between lg:w-auto">
-                    <a class="relative z-10" href="/" aria-label="logo">
-                        <img th:src="@{/img/logo.png}" width="191px" alt="">
-                    </a>
-                    <label for="hbr"
-                           class="peer-checked:hamburger block relative z-20 p-6 -mr-6 cursor-pointer lg:hidden">
-                        <div aria-hidden="true"
-                             class="m-auto h-0.5 w-5 rounded bg-gray-900 dark:bg-gray-300 transition duration-300"></div>
-                        <div aria-hidden="true"
-                             class="m-auto mt-2 h-0.5 w-5 rounded bg-gray-900 dark:bg-gray-300 transition duration-300"></div>
-                    </label>
+                <a class="relative z-10" href="/" aria-label="logo">
+                    <img th:src="@{/img/logo.png}" width="191px" alt="">
+                </a>
+                <label for="hbr" class="peer-checked:hamburger block relative z-20 p-6 -mr-6 cursor-pointer lg:hidden">
+                    <div aria-hidden="true" class="m-auto h-0.5 w-5 rounded bg-gray-900 dark:bg-gray-300 transition duration-300"></div>
+                    <div aria-hidden="true" class="m-auto mt-2 h-0.5 w-5 rounded bg-gray-900 dark:bg-gray-300 transition duration-300"></div>
+                </label>
+
+                <div class="mobile-menu hidden w-full flex-wrap justify-end items-center mb-16 space-y-8 p-6 border border-gray-100 rounded-3xl shadow-2xl shadow-gray-300/20 bg-white dark:bg-gray-800 lg:space-y-0 lg:p-0 lg:m-0 lg:flex md:flex-nowrap lg:bg-transparent lg:w-7/12 lg:shadow-none dark:shadow-none dark:border-gray-700 lg:border-0">
+                    <!-- Ссылки на разделы меню -->
+                    <a href="#courses" class="block md:px-4 transition hover:text-primary dark:hover:text-primaryLight">Курсы</a>
+                    <a href="#rating" class="block md:px-4 transition hover:text-primary dark:hover:text-primaryLight">Рейтинг</a>
+                    <a href="#contactUs" class="block md:px-4 transition hover:text-primary dark:hover:text-primaryLight">Связаться с нами</a>
+
+                    <!-- Ссылки для аутентификации -->
+                    <a href="/login" class="block md:px-4 transition hover:text-primary dark:hover:text-primaryLight">Войти</a>
                 </div>
+
                 <div class="navmenu hidden w-full flex-wrap justify-end items-center mb-16 space-y-8 p-6 border border-gray-100 rounded-3xl shadow-2xl shadow-gray-300/20 bg-white dark:bg-gray-800 lg:space-y-0 lg:p-0 lg:m-0 lg:flex md:flex-nowrap lg:bg-transparent lg:w-7/12 lg:shadow-none dark:shadow-none dark:border-gray-700 lg:border-0">
                     <div class="text-gray-600 dark:text-gray-300 lg:pr-4">
                         <ul class="space-y-6 tracking-wide font-medium text-base lg:text-sm lg:flex lg:space-y-0">
@@ -89,7 +95,6 @@
                             <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem">Настройки</a>
                             <a href="/logout" class="block px-4 py-2 text-sm text-gray-700" role="menuitem">Выход</a>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -113,25 +118,25 @@
                 <div class="grid grid-cols-3 space-x-4 md:space-x-6 md:flex md:justify-center lg:justify-start">
                     <a aria-label="add to slack"
                        href="/trial-test"
-                       class="p-4 border border-gray-200 dark:bg-gray-800 dark:border-gray-700 rounded-full duration-300 hover:border-cyan-400 hover:shadow-lg hover:shadow-cyan-600/20 dark:hover:border-cyan-300/30 module-link"
-                    >
+                       class="p-4 border border-gray-200 dark:bg-gray-800 dark:border-gray-700 rounded-full duration-300 hover:border-cyan-400 hover:shadow-lg hover:shadow-cyan-600/20 dark:hover:border-cyan-300/30 module-link">
                         <div class="flex justify-center space-x-4">
                             <img class="w-6 h-6"
                                  src="https://cdn.icon-icons.com/icons2/2466/PNG/512/blood_test_icon_149291.png"
                                  alt="slack logo" loading="lazy" width="128" height="128">
-                            <span class="hidden font-medium md:block dark:text-white">Пробный тест по ОРТ</span>
+                            <span class="font-medium text-sm md:text-base md:text-left dark:text-white">Пробный тест по ОРТ</span>
                         </div>
                     </a>
 
                     <a aria-label="add to chat" href="#rating"
-                       class="p-4 border border-gray-200 dark:bg-gray-800  dark:border-gray-700 rounded-full duration-300 hover:border-green-400 hover:shadow-lg hover:shadow-lime-600/20 dark:hover:border-green-300/30">
-                        <div class="flex justify-center space-x-4">
+                       class="p-4 border border-gray-200 dark:bg-gray-800 dark:border-gray-700 rounded-full duration-300 hover:border-green-400 hover:shadow-lg hover:shadow-lime-600/20 dark:hover:border-green-300/30">
+                        <div class="flex justify-center space-x-4 text-center">
                             <img class="w-6 h-6"
                                  src="https://cdn-icons-png.flaticon.com/512/5219/5219258.png"
                                  alt="chat logo" loading="lazy" width="128" height="128">
-                            <span class="hidden font-medium md:block dark:text-white">Рейтинг </span>
+                            <span class="font-medium text-sm md:text-base md:text-left dark:text-white">Рейтинг</span>
                         </div>
                     </a>
+
                 </div>
 
                 <div class="dark:text-gray-300">
@@ -200,24 +205,25 @@
 
 <!-- TOP -->
 <div id="rating" class="flex flex-col justify-center items-center h-[100vh]">
-    <div class="relative flex max-w-[700px] h-[700px] w-full flex-col rounded-[10px] border-[1px] border-gray-200 bg-white bg-clip-border shadow-md shadow-[#F3F3F3] dark:border-[#ffffff33] dark:!bg-navy-800 dark:text-white dark:shadow-none">
+    <div class="relative flex max-w-[1200px] h-[800px] w-full flex-col rounded-[10px] border-[1px] border-gray-200 bg-white bg-clip-border shadow-md shadow-[#F3F3F3] dark:border-[#ffffff33] dark:!bg-navy-800 dark:text-white dark:shadow-none">
         <div class="flex h-fit w-full items-center justify-between rounded-t-2xl bg-white px-4 pb-[20px] pt-4 shadow-2xl shadow-gray-100 dark:!bg-navy-700 dark:shadow-none">
-            <h4 class="text-lg font-bold text-black">
-                Топ
+            <h4 class="text-2xl font-bold text-black">
+                Топ 10
             </h4>
-            <button class="linear rounded-[20px] bg-lightPrimary px-4 py-2 text-base font-medium text-brand-500 transition duration-200 hover:bg-gray-100 active:bg-gray-200 dark:bg-white/5 dark:text-blue-700 dark:hover:bg-white/10 dark:active:bg-white/20">
-                See all
-            </button>
+            <a href="/top/0"
+               class="rounded-[20px] bg-lightPrimary right-0 py-2 text-lg font-medium text-brand-500 hover:bg-gray-100 active:bg-gray-200 dark:bg-white/5 dark:text-blue-700 dark:hover:bg-white/10 dark:active:bg-white/20">
+                Список
+            </a>
         </div>
         <div class="w-full overflow-x-scroll px-4 md:overflow-x-hidden">
-            <table role="table" class="w-full min-w-[800px] overflow-x-scroll">
+            <table role="table" class="table w-full overflow-x-scroll">
                 <thead>
                 <tr role="row">
                     <th colspan="1"
                         role="columnheader"
                         title="Toggle SortBy"
                         style="cursor: pointer">
-                        <div class="flex items-center justify-between pl-10 pb-2 pt-4 text-start uppercase tracking-wide text-gray-600 sm:text-xs lg:text-xs">
+                        <div class="flex items-center justify-between pl-16 pb-2 pt-4 text-start uppercase tracking-wide text-black sm:text-xs lg:text-base">
                             ФИО
                         </div>
                     </th>
@@ -225,7 +231,7 @@
                         role="columnheader"
                         title="Toggle SortBy"
                         style="cursor: pointer">
-                        <div class="flex items-center justify-between pb-2 pt-4 text-start uppercase tracking-wide text-gray-600 sm:text-xs lg:text-xs">
+                        <div class="flex items-center justify-center pb-2 pt-4 text-start uppercase tracking-wide text-black sm:text-xs lg:text-base">
                             Результат
                         </div>
                     </th>
@@ -233,18 +239,18 @@
                 </thead>
                 <tbody role="rowgroup" class="px-4">
                 <tr role="row" th:each="user : ${rating}">
-                    <td class="py-3 text-sm" role="cell">
+                    <td class="py-3 text-lg" role="cell">
                         <div class="flex items-center gap-2">
-                            <div class="h-[30px] w-[30px] rounded-full">
+                            <div class="h-[50px] w-[50px] rounded-full">
                                 <img th:src="@{${user.getMedalImage()}}" loading="eager"
-                                        class="h-full w-full rounded-full"
-                                        alt=""/>
+                                     class="h-full w-full rounded-full"
+                                     alt=""/>
                             </div>
-                            <p class="text-sm font-medium text-black"  th:text="${user.getFullName()}"></p>
+                            <p class="text-2xl font-medium text-black" th:text="${user.getFullName()}"></p>
                         </div>
                     </td>
-                    <td class="py-3 text-sm" role="cell">
-                        <p class="text-md font-medium text-black"  th:text="${user.getResult()}"></p>
+                    <td class="py-3 text-sm text-center" role="cell">
+                        <p class="text-2xl font-medium  text-black" th:text="${user.getResult()}"></p>
                     </td>
                 </tr>
                 </tbody>
@@ -340,6 +346,29 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var hbrCheckbox = document.getElementById("hbr");
+        var mobileMenu = document.querySelector(".mobile-menu");
+        var windowWidth = window.innerWidth;
+
+        if (mobileMenu && windowWidth >= 808) {
+            mobileMenu.remove();
+        }
+
+        function toggleMobileMenu() {
+            if (hbrCheckbox.checked) {
+                mobileMenu.classList.remove("hidden");
+            } else {
+                mobileMenu.classList.add("hidden");
+            }
+        }
+
+        toggleMobileMenu();
+        hbrCheckbox.addEventListener("change", toggleMobileMenu);
+    });
+</script>
 
 </body>
 </html>
