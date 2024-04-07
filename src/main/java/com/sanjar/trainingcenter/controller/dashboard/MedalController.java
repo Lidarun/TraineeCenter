@@ -1,9 +1,6 @@
 package com.sanjar.trainingcenter.controller.dashboard;
 
-import com.sanjar.trainingcenter.model.Application;
-import com.sanjar.trainingcenter.model.Course;
 import com.sanjar.trainingcenter.model.Medal;
-import com.sanjar.trainingcenter.model.Module;
 import com.sanjar.trainingcenter.service.MedalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
