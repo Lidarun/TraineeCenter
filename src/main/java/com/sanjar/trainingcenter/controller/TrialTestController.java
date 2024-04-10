@@ -30,10 +30,7 @@ public class TrialTestController {
 
     @GetMapping("/ort")
     public ResponseEntity<List<QuestionDto>> getTrialQuestions() {
-        List<QuestionDto> questions = questionService.findAllByModuleID(2);
-
-        System.out.println(questions);
-
+        List<QuestionDto> questions = questionService.findAllByModuleID(1);
         return new ResponseEntity<>(questions, HttpStatus.OK);
     }
 
@@ -57,9 +54,6 @@ public class TrialTestController {
             return new ResponseEntity<>("Промокод не найден", HttpStatus.NOT_FOUND);
         }
     }
-
-
-
 
     @GetMapping("/{courseId}/module/{moduleId}")
     public ResponseEntity<List<QuestionDto>> getQuestionsByCourse(@PathVariable("courseId") long courseId,
